@@ -1,0 +1,6 @@
+apiVersion: v2
+name: integration-service
+description: A Helm chart to distribute the project integration-service
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
