@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  integration-service:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2025-01-28T16:55:53.535673334+02:00"
+    description: A Helm chart to distribute the project integration-service
+    digest: 4f60dfe59090c715bc76d5d9fe7a8332996c058e72e94460334744aace25592a
+    icon: https://example.com/icon.png
+    name: integration-service
+    type: application
+    urls:
+    - integration-service-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-01-28T16:55:53.534816085+02:00"
