@@ -2,19 +2,23 @@ apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
   annotations:
-    build.appstudio.openshift.io/repo: https://github.com/konflux-ci/integration-service?rev={{revision}}
+    build.appstudio.openshift.io/repo: https://github.com/yftacherzog/integration-service?rev={{revision}}
     build.appstudio.redhat.com/commit_sha: '{{revision}}'
     build.appstudio.redhat.com/pull_request_number: '{{pull_request_number}}'
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/max-keep-runs: "3"
-    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "main"
+    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "deploy-helm"
+    pipelinesascode.tekton.dev/task: >-
+      [
+      task/build-chart.yaml
+      ]
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: integration-service
     appstudio.openshift.io/component: integration-service
     pipelines.appstudio.openshift.io/type: build
   name: integration-service-on-pull-request
-  namespace: rhtap-integration-tenant
+  namespace: yherzog-tenant
 spec:
   params:
   - name: dockerfile
@@ -24,7 +28,7 @@ spec:
   - name: image-expires-after
     value: 5d
   - name: output-image
-    value: quay.io/redhat-user-workloads/rhtap-integration-tenant/integration-service/integration-service:on-pr-{{revision}}
+    value: quay.io/redhat-user-workloads-stage/yherzog-tenant/integration-service:on-pr-{{revision}}
   - name: path-context
     value: .
   - name: revision
@@ -151,6 +155,8 @@ spec:
         value: $(params.git-url)
       - name: revision
         value: $(params.revision)
+      # - name: depth
+      #   value: 0
       runAfter:
       - init
       taskRef:
@@ -192,6 +198,22 @@ spec:
         operator: in
         values:
         - "true"
+      workspaces:
+      - name: source
+        workspace: workspace
+    - name: build-chart
+      params:
+      - name: IMAGE
+        value: $(params.output-image)
+      - name: COMMIT_SHA
+        value: $(tasks.clone-repository.results.commit)
+      - name: VERSION_SUFFIX
+        value: "-on-pr"
+      runAfter:
+      - prefetch-dependencies
+      taskRef:
+        name: build-chart
+        kind: Task
       workspaces:
       - name: source
         workspace: workspace

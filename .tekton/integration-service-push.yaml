@@ -2,18 +2,18 @@ apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
   annotations:
-    build.appstudio.openshift.io/repo: https://github.com/konflux-ci/integration-service?rev={{revision}}
+    build.appstudio.openshift.io/repo: https://github.com/yftacherzog/integration-service?rev={{revision}}
     build.appstudio.redhat.com/commit_sha: '{{revision}}'
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/max-keep-runs: "3"
-    pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch == "main"
+    pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch == "deploy-helm"
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: integration-service
     appstudio.openshift.io/component: integration-service
     pipelines.appstudio.openshift.io/type: build
   name: integration-service-on-push
-  namespace: rhtap-integration-tenant
+  namespace: yherzog-tenant
 spec:
   params:
   - name: dockerfile
@@ -21,7 +21,7 @@ spec:
   - name: git-url
     value: '{{repo_url}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/rhtap-integration-tenant/integration-service/integration-service:{{revision}}
+    value: quay.io/redhat-user-workloads-stage/yherzog-tenant/integration-service:{{revision}}
   - name: path-context
     value: .
   - name: revision
