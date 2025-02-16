@@ -2,7 +2,7 @@ module github.com/konflux-ci/integration-service
 
 go 1.22.0
 
-toolchain go1.22.10
+toolchain go1.24.0
 
 require (
 	github.com/agiledragon/gomonkey/v2 v2.12.0
