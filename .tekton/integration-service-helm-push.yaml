@@ -15,7 +15,7 @@ metadata:
     appstudio.openshift.io/component: integration-service-helm
     pipelines.appstudio.openshift.io/type: build
   name: integration-service-helm-on-push
-  namespace: yherzog-tenant
+  namespace: user-ns2
 spec:
   params:
   - name: git-url
@@ -23,7 +23,7 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads-stage/yherzog-tenant/integration-service-helm:{{revision}}
+    value: quay.io/yftacherzog-konflux/user-ns2/integration-service-helm:{{revision}}
   - name: dockerfile
     value: dist/chart/Chart.yaml
   - name: path-context
