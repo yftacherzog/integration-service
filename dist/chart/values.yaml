@@ -3,8 +3,8 @@ controllerManager:
   replicas: 1
   container:
     image:
-      repository: controller
-      tag: latest
+      repository: quay.io/yftacherzog-konflux/user-ns2/integration-service-release
+      tag: sha256:e4ea86aac17b736644a9dfdd38857a80f5c399ec36ead27fbcc0f9279431db43
     args:
       - "--leader-elect"
       - "--metrics-bind-address=127.0.0.1:8080"
