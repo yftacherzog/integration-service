@@ -2,7 +2,7 @@
 controllerManager:
   replicas: 1
   container:
-    image: quay.io/yftacherzog-konflux/user-ns2/integration-service-release@sha256:e4ea86aac17b736644a9dfdd38857a80f5c399ec36ead27fbcc0f9279431db43
+    image: quay.io/yftacherzog-konflux/user-ns2/integration-service-release@sha256:0ad25683ec9be649c58f3af0d5f5168597e4b94e5cf18cb51145ccf0a9d6acde
     args:
       - "--leader-elect"
       - "--metrics-bind-address=127.0.0.1:8080"
