@@ -9,6 +9,11 @@ metadata:
     pipelinesascode.tekton.dev/max-keep-runs: "3"
     pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch
       == "deploy-helm"
+    pipelinesascode.tekton.dev/on-path-change-ignore: "[
+        dist/chart/***,
+        .tekton/integration-service-helm-pull-request.yaml,
+        .tekton/integration-service-helm-push.yaml
+      ]"
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: integration-service
