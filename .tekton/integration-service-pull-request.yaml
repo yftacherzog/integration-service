@@ -34,7 +34,7 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: build-source-image
-    value: 'true'
+    value: 'false'
   pipelineSpec:
     finally:
     - name: show-sbom
