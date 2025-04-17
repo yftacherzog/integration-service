@@ -40,7 +40,7 @@ spec:
     value: dist/chart
   pipelineSpec:
     description: pipeline for building a Helm chart
-    # finally:
+    finally:
     # - name: show-sbom
     #   params:
     #   - name: IMAGE_URL
@@ -54,25 +54,25 @@ spec:
     #     - name: kind
     #       value: task
     #     resolver: bundles
-    # - name: show-summary
-    #   params:
-    #   - name: pipelinerun-name
-    #     value: $(context.pipelineRun.name)
-    #   - name: git-url
-    #     value: $(tasks.clone-repository.results.url)?rev=$(tasks.clone-repository.results.commit)
-    #   - name: image-url
-    #     value: $(params.output-image)
-    #   - name: build-task-status
-    #     value: $(tasks.build-chart.status)
-    #   taskRef:
-    #     params:
-    #     - name: name
-    #       value: summary
-    #     - name: bundle
-    #       value: quay.io/konflux-ci/tekton-catalog/task-summary:0.2@sha256:870d9a04d9784840a90b7bf6817cd0d0c4edfcda04b1ba1868cae625a3c3bfcc
-    #     - name: kind
-    #       value: task
-    #     resolver: bundles
+    - name: show-summary
+      params:
+      - name: pipelinerun-name
+        value: $(context.pipelineRun.name)
+      - name: git-url
+        value: $(tasks.clone-repository.results.url)?rev=$(tasks.clone-repository.results.commit)
+      - name: image-url
+        value: $(params.output-image)
+      - name: build-task-status
+        value: $(tasks.build-chart.status)
+      taskRef:
+        params:
+        - name: name
+          value: summary
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-summary:0.2@sha256:870d9a04d9784840a90b7bf6817cd0d0c4edfcda04b1ba1868cae625a3c3bfcc
+        - name: kind
+          value: task
+        resolver: bundles
     params:
     - description: Source Repository URL
       name: git-url
